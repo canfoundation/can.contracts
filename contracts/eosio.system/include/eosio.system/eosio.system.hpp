@@ -708,7 +708,7 @@ namespace eosiosystem {
           * @param amount - amount of tokens taken out of 'from' REX fund.
           *
           * @pre A voting requirement must be satisfied before action can be executed.
-          * @pre User must vote for at least 15 producers or delegate vote to proxy before buying REX.
+          * @pre User must vote for at least 3 producers or delegate vote to proxy before buying REX.
           *
           * @post User votes are updated following this action.
           * @post Tokens used in purchase are added to user's voting power.
@@ -727,7 +727,7 @@ namespace eosiosystem {
           * @param from_cpu - amount of tokens to be unstaked from CPU bandwidth and used for REX purchase.
           *
           * @pre A voting requirement must be satisfied before action can be executed.
-          * @pre User must vote for at least 15 producers or delegate vote to proxy before buying REX.
+          * @pre User must vote for at least 3 producers or delegate vote to proxy before buying REX.
           *
           * @post User votes are updated following this action.
           * @post Tokens used in purchase are added to user's voting power.

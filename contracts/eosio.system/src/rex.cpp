@@ -412,7 +412,7 @@ namespace eosiosystem {
    }
 
    /**
-    * @brief Checks if account satisfies voting requirement (voting for a proxy or 15 producers)
+    * @brief Checks if account satisfies voting requirement (voting for a proxy or 3 producers)
     * for buying REX
     *
     * @param owner - account buying or already holding REX tokens
@@ -421,7 +421,7 @@ namespace eosiosystem {
    void system_contract::check_voting_requirement( const name& owner, const char* error_msg )const
    {
       auto vitr = _voters.find( owner.value );
-      check( vitr != _voters.end() && ( vitr->proxy || 15 <= vitr->producers.size() ), error_msg );
+      check( vitr != _voters.end() && ( vitr->proxy || 3 <= vitr->producers.size() ), error_msg );
    }
 
    /**
