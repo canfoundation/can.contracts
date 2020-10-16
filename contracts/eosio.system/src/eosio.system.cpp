@@ -332,31 +332,21 @@ namespace eosiosystem {
            has_dot |= !(tmp & 0x1f);
            tmp >>= 5;
          }
-
-         bool has_newaccount_below_6_chars = (newact.value & 0x7FFFFFFFF0ull) == 0;
-         bool has_creator_below_6_chars = (creator.value & 0x7FFFFFFFF0ull) == 0;
-
-         if( has_dot) { // or is less than 12 characters
+         if( has_dot ) { // or is less than 12 characters
             auto suffix = newact.suffix();
-            if( suffix == newact && has_newaccount_below_6_chars) {
-               check( false, "disable at this time" );
+            if( suffix == newact ) {
                name_bid_table bids(get_self(), get_self().value);
                auto current = bids.find( newact.value );
                check( current != bids.end(), "no active bid for name" );
                check( current->high_bidder == creator, "only highest bidder can claim" );
                check( current->high_bid < 0, "auction for name is not closed yet" );
                bids.erase( current );
-            } else if (suffix != newact) {
-               check( creator == suffix, "only suffix may create this account");
-               check( has_creator_below_6_chars, "only premium name can create name with dot" );
-
-               // creator length < 6 && newaccount length < 6 && suffix != newact && creator == suffix
-               // is considering this case should be accepted or not
-               check(!has_newaccount_below_6_chars, "can not create new sub account shoter than 6 characters" );
-            }  
+            } else {
+               check( creator == suffix, "only suffix may create this account" );
+            }
          }
       }
-
+      
       user_resources_table  userres( get_self(), newact.value );
 
       userres.emplace( newact, [&]( auto& res ) {
